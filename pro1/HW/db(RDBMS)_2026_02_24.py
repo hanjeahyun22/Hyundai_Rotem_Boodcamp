@@ -216,6 +216,41 @@
 남 3 8500
 여 2 7800
 '''
+# import MySQLdb
+# import pickle
+
+# with open('mydb.dat', mode='rb') as obj:
+#     config = pickle.load(obj)
+
+# def chulbal():
+#     try:
+#         conn = MySQLdb.connect(**config)                    # **객체 : 객체를 dict 형태로 받겠다는 의미
+#         cursor = conn.cursor()
+
+#         sql = """
+#             select jikwongen 성별, count(*) 직원수, avg(jikwonpay) from jikwon where jikwongen is not null group by jikwongen
+#         """
+#         cursor.execute(sql)
+#         datas = cursor.fetchall()
+#         for a, b, c in datas:
+#             print(a, b, c)
+
+#     except Exception as e:
+#         print('err : ', e)
+#     finally:
+#         cursor.close()
+#         conn.close()
+
+# if __name__ == "__main__":
+#     chulbal()
+
+
+'''
+문4)직원별 관리 고객 수 출력 (관리 고객이 없으면 출력에서 제외)
+직원번호 직원명 관리 고객 수
+1 홍길동 3
+2 한송이 1
+'''
 import MySQLdb
 import pickle
 
@@ -228,11 +263,13 @@ def chulbal():
         cursor = conn.cursor()
 
         sql = """
-            select jikwongen 성별, count(*) 직원수, avg(jikwonpay) from jikwon group by jikwongen
+            select jikwonno 직원번호, jikwonname 직원명, count(*) 관리고객수 from jikwon
+            right outer join gogek on jikwon.jikwonno = gogek.gogekdamsano
+            group by gogekdamsano;
         """
         cursor.execute(sql)
-        datas = cursor.fetchall()
-        for a, b, c in datas:
+        datas_4 = cursor.fetchall()
+        for a, b, c in datas_4:
             print(a, b, c)
 
     except Exception as e:
