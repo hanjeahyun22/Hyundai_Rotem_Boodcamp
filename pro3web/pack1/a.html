@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Tag : 문서의 구조와 형태를 표현하는 명령어로 <> 안에 적는다.<br/><br>
+    aaa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bbb &nbsp;ccc<br>
+    -- 출력 형태에 따른 태그 종류 -- <br>
+    1) Block 방식 : 행 분리(Line 스킵)이 자동으로 이루어짐 : p, h, div, ol, li ...<br>
+    2) Inline 방식 : 같은 행에 계속 출력 : b, i, sapn, ...
+    
+    <!--  html 주석  -->
+    <hr>
+    <p><b>문단 나누기</b></p>           <!-- p태그 : 행 바꿈 -->
+    <i>이탤릭으로 표시</i>
+    작업 계속
+    <h1>표제용 제목 가장 큼</h1>        <!-- h태그 : Bold + 글씨 크기 -->
+    <h6>표제용 제목 가장 작음</h6>
+    <div style="background-color: yellow;">구역 설정 태그(행 전체)</div>good            <!-- div 태그는 라인 스킵 있음 -> good이 다음 줄에 출력-->
+    <span style="background-color: silver;">구역 설정 태그(일부 영역만)</span>good      <!-- span 태그는 라인스킵 없읍 -> good이 해당 줄 끝에 출력-->
+    <b>&lt;하하하&gt;</b><br>               <!-- 특수문자 표시를 위해서, excape문자 사용 <>는 html문에서 태그를 의미함. < : &lt;  ,   > : &gt;-->
+    <hr size="10" width="200" color="blue">     <!-- 태그에 속성 부여-->
+    <hr width="60%" color="0000ff">             <!-- width를 통해서 화면의 크기에 따른 구분선<hr>의 width가 달라짐 ->> 반응형 웹에 적용 가능 -->
+    <pre>
+        내가    입력한
+            그대로   보 여    줌
+    </pre>
+    <br>
+    <h2>-- 목록 만들기 -- </h2>
+    <ul>
+        <li>파이썬</li>
+        <li>마리아디비</li>
+    </ul>
+    <ol>
+        <li>파이썬</li>
+        <li>마리아디비</li>
+        <ul>
+            <li>파이썬</li>
+            <li>마리아디비</li>
+    </ul>
+    </ol>
+</body>
+</html>

@@ -7,6 +7,8 @@ import os
 import urllib.parse
 
 # --- get / post 요청 받을 때 ---------
+# Get Method는 보안에 문제 & 대용량 전송 불가
+# Post는 
 method = os.environ.get("REQUEST_METHOD", "GET")
 
 if method == "POST":                                                # POST Method

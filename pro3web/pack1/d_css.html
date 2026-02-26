@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 인터널 방식 스타일 지정 선언-->
+    <style type="text/css">
+        h4{font-size: 20px; font-family: 궁서; color: red;}
+        h5,strong{
+            font-size: 15px;
+            color: blueviolet;
+        }
+
+        .c1{color: silver;
+            font-family: 돋움, 궁서, serif, "Times New Roman";}
+
+        #myid1{
+            color: cyan; font-style: italic;
+        }
+    </style>
+
+    <!-- External style arrange -->
+    <link rel="stylesheet" type="text/css" href="css/ex.css" />
+</head>
+<body>
+    <h1>** CSS(Cascading Style Sheets) - 스타일 시트 **</h1>
+    <pre>
+    HTML 문서에 다양한 레이아웃과 꾸미기를 위한 표현적인 언어 CSS 사용
+    서식 : 선택자{속성 : 값; 속성 : 값; ...}
+    선택자 종류는
+    1) 요소명   : body tag 내의 특정 tag를 직접 지적해서 선택
+    2) .        : class 선택자 - 클래스 속성값으로 보유하고 있는 요소를 선택
+    3) #        : id 선택자로 단수 선택 가능
+
+    <strong>스타일은 하위 요소에 상속된다.</strong>
+    
+    CSS 적용 방법 : inline, internal, external
+    </pre>
+    <hr><hr>
+    <h2>***<b>CSS</b> 적용<strong>하기</strong> ***</h2>            <!-- <b>, <strong> 모두 bold 처리-->
+    <hr><hr>
+    <h3>-- 인라인 방식 --</h3>
+    <span style="font-size: 30px; color: aqua;">인라인 방식</span> (해당 요소 직접 스타일 지정)               <!-- <span> : 직접 범위 지정-->
+    <hr>
+    <h3>-- 인터널 방식 --</h3>
+    <h4>인터널 방식(head 부분에 미리 h4의 스타일 지정)</h4>
+    <h4 style="color: goldenrod; font-size: 30;">하지만, internal 방식보단, inline 방식이 우선순위!</h4>
+    <h5>h5 서식- 인터널 방식으로 여러 서식의 스타일 미리 지정 가능</h5>
+    <hr>
+    <h3>-- class 방식 --</h3>
+    <h2><p class="c1">클래스는 동일 이름 "c1" 이 적용될 수 있음. -> class명은 중복 가능</p></h2>
+    <h2 class="c1"> 같은 인터널 방식이더라도, 나중에 지정한 스타일이 적용됨.</h2>
+    <hr>
+    <h3>-- id 방식 --</h3>
+    <p id = "myid1">id명은 중복 불가. head에서 지정한 id에 따른 스타일 지정.</p>
+    <hr>
+    <h3>-- External 방식 : 외부 css 파일에서 서식 내용 지정--</h3>
+    <div id = "myid2">(myid2 아이디 사용) id명은 중복 불가. external 방식 : 별도 css 파일로 적용.</div>
+    <br>
+    <b><h4 style="font-size: 15px; color: black; font-family: 돋움;"><p>* External 방식 - 동적 선택자 *</p></h4>
+    -- focus
+    <form>
+        <tr>
+            <td>아이디 : </td>
+            <td><input type="text" name="id"></td>
+        </tr>
+        <tr>
+            <td>비밀번호 : </td>
+            <td><input type="text" name="pwd"></td>
+        </tr>
+    </form>
+    <br>
+    -- link & hover<br>
+    <a href="https://naver.com">네이버</a><br>
+    <a href="https://kbs.co.kr">kbs</a> 공영방송
+    <br>
+    -- 선택적 css 연습 (tag, id, class)<br>
+    <b>b tag</b>
+    <div><b>div-b</b></div>
+    <div><span><b>div-span tag</b></span></div>
+    <div><b id="hi">div-b tag : id-hi</b></div>
+    <div><b class="hello">div-class tag : class-hello</b></div>
+</body>
+</html>
