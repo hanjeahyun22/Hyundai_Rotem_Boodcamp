@@ -3,14 +3,14 @@ body{ margin: 0; }
 
 #page{
   overflow: auto;   /* float clearfix */
-  width: 1000px;    /* 원하면 제거 가능 */
-  margin: 0 auto;   /* 가운데 정렬 */
+  width: 90%;    /* 원하면 제거 가능 */
+  margin: 30px auto;   /* 가운데 정렬 */
 }
 
 #menu{
   float: left;
   width: 25%;
-  font-size: 30px;
+  font-size: 20px;
 }
 
 #menu h2{ margin: 0; }
@@ -28,11 +28,12 @@ body{ margin: 0; }
 
 #content iframe{
   width: 98%;
-  height: 150px;
+  height: 300px;
   border: 0;
   display: block;
 }
 
-#footer{
+#content b{
+  font-size: 30px;
   margin-top: 8px;
 }
