@@ -1,14 +1,38 @@
-#menu{
-    float: right;
-    font-size: 30;
-    width: 25%;
-    }
+*{ box-sizing: border-box; }
+body{ margin: 0; }
 
-table{
-    float: right;
+#page{
+  overflow: auto;   /* float clearfix */
+  width: 1000px;    /* 원하면 제거 가능 */
+  margin: 0 auto;   /* 가운데 정렬 */
 }
 
-img{
-    width: "98%";
-    height: "200";
-    }
+#menu{
+  float: left;
+  width: 25%;
+  font-size: 30px;
+}
+
+#menu h2{ margin: 0; }
+
+#content{
+  float: right;
+  width: 75%;
+}
+
+#content img{
+  width: 98%;
+  height: 200px;
+  display: block;
+}
+
+#content iframe{
+  width: 98%;
+  height: 150px;
+  border: 0;
+  display: block;
+}
+
+#footer{
+  margin-top: 8px;
+}

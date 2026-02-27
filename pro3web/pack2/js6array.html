@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    js Array(배열) : 순서가 있는 여러 개의 자료를 대표명을 주고 첨자로 값을 구분하는 자료구조<br>
+    -> 반복처리가 효과적<br>
+    형식 : 배열명 = new Array();
+    <hr>
+    <script type="text/javascript">
+        let aa = new Array()                    // 크기가 가변적으로 늘어남.
+        aa[0] = 10;
+        aa[1] = 5.6;
+        aa[3] = "결과는";
+        aa[4] = "안녕";
+        aa[5] = true;
+        aa[6] = {kbs:9, sbs:5};                  // {ket:value} : 배열 요소값 type은 마음대로 가능. -> json 형태도 가능. -> python의 묶음자료형 중 dict와 동일한 개념
+        document.write(aa, ' ', typeof(aa));    // 'aa 배열 자체'의 type은 객체(object), 즉 Python의 class와 동일한 개념. -> 객체 변수
+        document.write(`<br>${aa[0]} &nbsp&nbsp${aa[1]} &nbsp&nbsp전체 크기 : ${aa.length}`);
+        
+        let su = 0, su2=0;
+        document.write(`<br>${aa[0]} &nbsp&nbsp${aa[su]} &nbsp&nbsp${aa[su2]}`);      // 첨자는 상수, 변수 모두 가능
+        document.write("<br>");
+
+        let bb = new Array(100, 200, 300);      // 배열 선언 시, 초기값 부여
+        document.write(`<br>${bb[0]} ${bb[1]} ${bb[2]}`);
+        document.write("<br>");
+        
+        let cc = [];                            // 비어 있는 배열 선언. 배열 리터럴
+        cc[0] = "tom";
+        cc.push(23);
+        cc.push("seoul");
+        cc.push(82, 1234, 5678);
+        document.write(`<br>${cc[0]} ${cc[1]} ${cc[2]} ${cc[3]} ${cc[4]} ${cc[5]}`);
+        document.write(`<br>cc 배열의 크기는 ${cc.length}`);                                // 배열 크기 카운트는 1부터 시작
+        cc[99] = 'wow';
+        document.write(`<br>cc 배열의 크기는 ${cc.length}`);
+        document.write("<hr>");
+
+        let dd = new Array;                                                                 // 배열 선언 후, for을 통해 자료 입출력
+        for (let m = 0; m < 10; m++){
+            dd[m] = m +1;
+        }
+        document.write("dd[0] : ", dd[0])
+        document.write("<br>")
+        for (let m = 0; m < 10; m++){
+            document.write(dd[m], "&nbsp;&nbsp;&nbsp;");            // Browser 즉, 일반 사용자에게 출력
+            console.log(dd[m]);                                     // [검사] -> console창 : 개발자가 개발 도중 값 참조 시 사용
+        }
+        document.write("<br>");
+
+        let myarr = [
+            "안녕", true, 3.5, {name:'신기해', phone:'0101111111'},
+            function(){
+                document.write('난 함수');
+            }
+        ]
+        document.write(myarr[0]);
+        document.write("<br>");
+        document.write(myarr[3].name, ' ',myarr[3].phone);
+        document.write("<br>");
+        myarr[4]();
+        document.write("<br>");
+        document.write("<hr>");
+
+        let korea = ['연필', '지우개', '노트'];         // 배열 요소 출력   for
+        // 방법 1)
+        for (let i = 0; i < korea.length; i++){
+            document.write(`${korea[i]} `)
+        }
+        document.write("<br>");
+
+        // 방법 2)
+        for (let i of korea){                       // ~ of ~ : 묶음형 자료의 값 활용
+            document.write(`${i} `)
+        }
+        document.write("<br>");
+
+        // 방법 3)                                  // ~ in ~ : 묶음형 자료의 index 값 활용
+        for (let i in korea){
+            document.write(korea[i], " ")
+        }
+        document.write("<br>");
+        document.write("<hr>");
+
+        // 배열 요소 제거
+        document.write("<h2>배열 요소 제거</h2>")
+        let ar = ['i', 'go', 'home'];
+        document.write(ar, " 배열 길이 : ", ar.length);
+        document.write("<br>");
+
+        delete ar[1];
+        document.write("delete로 배열 요소 제거. aa : ", ar, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 배열 길이 : ", ar.length);
+        document.write("<br>");
+
+        ar = ['i', 'go', 'home'];
+        ar.splice(1,1)              // index 1부터 1개 삭제
+        document.write("splice로 배열 요소 제거. aa : ", ar, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 배열 길이 : ", ar.length);
+        document.write("<br>");
+        document.write("<hr>");
+
+        // 구조분해 할당 : 배열, 객체의 값들을 추출하여 한 번에 여러 변수에 할당함.
+        document.write("<h2>구조분해 할당</h2>")
+        let nums=[1, 2, 3, 4];
+        let [a1, a2, a3] = nums;
+        document.write(`${a1} ${a2} ${a3}`)
+        document.write("<br>");
+        document.write("<hr>");
+
+        // 전개 연산자 : ... : 배열값을 차례대로 새로운 변수에 할당함.
+        document.write("<h2>전개 연산자</h2>")
+        const fruits = ['apple', 'peach', 'melon'];
+        const imsi = [...fruits];
+        document.write(imsi)
+        document.write("<br>");
+        document.write("<hr>");
+    </script>
+</body>
+</html>

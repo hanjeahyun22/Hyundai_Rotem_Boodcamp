@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    -- 변수 --<br>
+    <script type="text/javascript">
+        // var aa;         // 전통적인 방법으로 변수 선언 방법
+        let aa;         // 요즘 사용하는 변수 선언  방법               /*여러줄 주석*/
+        aa = 100;
+        
+        let bb = 20.5;
+        bb += 10;
+
+        const cc = 300;
+        // cc = cc + 10;           // cc는 const(상수)값으로 선언했으므로, 고정값 -> 변경 불가능 --> 에러 발생
+
+        let dd = false;             // bool 연산자 출력
+
+        let msg = "변수 선언 이해";
+
+        // documnet.write() --> ()안의 내용은 html 문
+        document.write(aa, " ", bb, " ",cc, " ", dd, " ", msg);
+        document.write("<hr>")
+        document.write("type 확인 : ", typeof(1), ' ', typeof(-1.5), ' ', typeof('str'), ' ', typeof(true), ' ', typeof(null), ' ', typeof(undefined))
+        
+        {
+            let v1 = 1;         // 지역(local) 변수
+            // var v1 = 1;         // 전역(global) 변수
+            document.write("<br>", v1)
+            {
+                let v2 = 2;
+                document.write("<br>", v2)
+                {
+                    let v3 = 3;
+                    document.write("<br>", v3)
+                    document.write("<br>", v1, ' ', v2, ' ', v3,"<br><hr>")
+                }
+            }
+        }
+        // document.write("<br>", v1, ' ', v2, ' ', v3)        // v1, v2, v3 변수가 {} 영역 밖에 있으므로 참조 불가, 에러 발생
+    </script>
+
+    -- 연산자 --<br>
+    <script>
+        let x  = 5, y = 2;
+        document.write("<br>", x, " ", y);
+        document.write("<br>산술 연산 : ", x + y, " ", x / y, " ", x % y);
+        document.write("<br>관계 연산 : ", x > y, " ", x <= y, " ", x == y, " ", x != y);        // bool 값으로 출력
+        document.write("<br>논리 연산 : ", x > y && x <= y, " ", x > y || x <= y);               // && : and, || : or
+        document.write("<br>누적 연산 : ", x = x + 1, " ", ++x, " ", x += 1);
+        document.write("<br>삼항 연산 : ", (x+y)?1000:1000+2000);                               // ? 앞의 조건이 참이면 : 이전 계산 수행, 거짓이면 : 다음 계산 실행
+        // 연산자 우선순위는 python과 동일
+
+        document.write("<br>a" + "b" + "c")                                                     // 문자열 더하기
+
+        let m, b, c;
+        m = b = c = 6 + 5;          // 할당 연산 Chaining
+        document.write("<br>", m, " ", b, " ", c)
+    </script>
+</body>
+</html>
