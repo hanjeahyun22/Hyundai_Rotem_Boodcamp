@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function func(){
+            // 이벤트 처리용 함수
+            let dataTime = "2026-03-03";
+            let arrData = dataTime.split("-");
+            // document.write(`${arrData[0]}년 ${arrData[1]}월 ${arrData[2]}일`)
+            console.log(`${arrData[0]}년 ${arrData[1]}월 ${arrData[2]}일`)
+        }
+    </script>
+</head>
+<body>
+    <h2>이벤트 처리 함수 이해</h2>
+    <hr>
+
+    <h3>a 태그는 자동으로 event Hanlder 기능 탑재</h3>
+    <a href="https://www.naver.com">네이버</a><br>
+    <a href="javascript:func()">이벤트 처리 함수 호출(event Handler X)</a>
+    <hr>
+
+    <h3>event Hanlder : on이벤트종류 = 핸들러 함수()</h3>
+    <a href="javascript:onclick = func()">이벤트 처리 함수 호출(event Handler O)</a>
+    <hr>
+
+    <h3>버튼 : 마우스 오버, 아웃 CSS 기본 탑재</h3>
+    <button onclick="func()">이벤트 처리 함수 호출</button>     <!-- onclink : 버튼을 클릭하면 func() 실행-->
+    <br>
+    <input type  = 'button' onclick="func()" value = "input type = 'button' 방식 : 이벤트 처리 함수 호출" />
+
+</body>
+</html>
