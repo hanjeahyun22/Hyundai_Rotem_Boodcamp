@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}기본 제목{% endblock %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <h2>공통 머리글(header : 상단 메뉴)</h2>
+    <hr>
+    {% block content %}
+        기본 내용
+    {% endblock %}
+    <hr>
+
+    <!-- 공통 바닥글(footer) -->
+    <footer class="bg-light text-center">
+        <span class="text-muted">작성자 : 홍길동 (주)에이콘 (전화)02-111-2222</span>
+    </footer>
+</body>
+</html>
