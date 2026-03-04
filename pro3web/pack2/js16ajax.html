@@ -6,6 +6,7 @@
     <title>Document</title>
     <script>
         window.onload = () => {
+            // 클릭하면 실행(실행결과X) 되어야 하므로, 함수 뒤에 () 괄호 X
             document.querySelector("#btnGet").onclick = getFunc;
             document.querySelector("#btnPost").onclick = postFunc;
         }
@@ -30,7 +31,8 @@
             // ===============================
             // 3. Query String 작성 (GET 방식 데이터 전달)
             // ===============================
-            let fname = "js.py?irum=" + irum + "&age=" + age;
+            // 임시방편용 js16.py 작성 (이 임시 파일은 처리 후, json을 반환한다고 가정.)
+            let fname = "js16.py?irum=" + irum + "&age=" + age;           // js16.py : 요청명
 
              // ===============================
             // 4. open() 호출
@@ -47,7 +49,7 @@
             xhr.onreadystatechange = function(){
                 // readyState 4 = COMPLETED (13번 항목)
                 // status 200 = OK (5번 항목)
-                if(xhr.readySate === 4 && xhr.status === 200){
+                if(xhr.readyState === 4 && xhr.status === 200){
                     // ===============================
                     // 6. 응답 처리
                     // responseText 사용 (4번 항목)
@@ -65,6 +67,23 @@
             xhr.send();
         }
 
+        function postFunc(){
+            let irum = frm.name.value;
+            let age = frm.age.value;
+
+            xhr = new XMLHttpRequest();
+            let fname = "js16.py";
+            xhr.open("POST", fname, true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    process1();
+                }
+            }
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("irum=" + irum + "&age=" + age); // body 영역에 포함되어 전송(대용량)
+            
+        }
+
         // ===============================
         // 8. 서버 응답 처리 함수
         // ===============================
@@ -73,9 +92,6 @@
             alert(xhr.responseText);
         }
 
-        function postFunc(){
-
-        }
     </script>
 </head>
 <body>

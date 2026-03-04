@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error {color:red; margin-top:10px;}
+        table{
+            border-collapse:collapse;       /*table의 테두리 함치기*/
+            margin-top: 15px;
+            width: 500px;
+        }
+
+        th, td{
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        th {background-color: #eee;}
+    </style>
+</head>
+<body>
+    <h3>직원 부서별 검색(Ajax)</h3>
+    <input type="text" id="deptKeyword" placeholder="부서명 입력">
+    <button id="btnSearch">검색</button>
+
+    <div id="loading"></div>
+    <div id="message"></div>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("btnSearch").addEventListener("click", loadJikwons);
+
+        async function loadJikwons(){
+            // alert("A")
+            const keyword = document.getElementById("deptKeyword").value.trim();
+            const loading = document.getElementById("loading");
+            const message = document.getElementById("message");
+            const resultDiv = document.getElementById("result");
+
+            loading.innerHTML = "데이터 로딩 중";
+            message.innerHTML = "";
+            resultDiv.innerHTML = "";
+
+            try{
+                const response = await fetch("js19jikwon.json");
+                // alert(response.ok);
+                if(!response.ok){
+                    throw new Error("서버 오류 발생");
+                }
+
+                const jsonData = await response.json();
+                
+                if (jsonData.status !== "success"){
+                    throw new Error("서버 응답 오류 발생");
+                }
+
+                const jikwons = jsonData.data;
+
+                // 부서 필터링
+                const filtered = jikwons.filter(jik => 
+                    jik.dept.includes(keyword)
+                );
+
+                if (filtered.length === 0){
+                    loading.innerHTML = "";
+                    message.innerHTML = "<b>검색 결과가 없어요</b>";
+                    return;
+                }
+
+                renderTableFunc(filtered);
+
+                // 검색 인원수와 연봉 평균 - reduce() : 배열 축소
+                // filtered 배열에 있는 모든 직원의 연봉을 더해서 인원수로 나눔.
+                const avgSalary = filtered.reduce((sum, emp) => sum + emp.salary, 0) / filtered.length;
+
+                message.innerHTML = "검색 인원 : " + filtered.length + " / 평균 연봉 : " + avgSalary.toFixed(2);        // toFixed(2) : 소수점 이하 둘째자리까지 표시
+                loading.innerHTML = "";
+
+            }catch(error){
+                loading.innerHTML = "";
+                message.innerHTML = "<span class='error'>" + error.message + "</span>";
+            }
+        }
+
+        function renderTableFunc(data){
+            let table = "<table>";
+            table += "<tr><th>ID</th><th>이름</th><th>부서</th><th>연봉</th></tr>";
+            data.forEach(emp => {
+                table += "<tr>";
+                table += "<td>" + emp.id + "</td>";
+                table += "<td>" + emp.name + "</td>";
+                table += "<td>" + emp.dept + "</td>";
+                table += "<td>" + emp.salary + "</td>";
+                table += '</tr>';
+            });
+            table += "</table>";
+
+            document.getElementById("result").innerHTML = table;
+        }
+    </script>
+</body>
+</html>

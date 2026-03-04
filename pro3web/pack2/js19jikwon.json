@@ -1,0 +1,11 @@
+{
+    "status":"success",
+    "count":5,
+    "data":[
+        {"id":1,"name":"홍길동","dept":"영업부","salary":6500},
+        {"id":2,"name":"이순신","dept":"총무부","salary":4200},
+        {"id":3,"name":"강감찬","dept":"전산부","salary":5900},
+        {"id":4,"name":"강나루","dept":"인사부","salary":6700},
+        {"id":5,"name":"신선해","dept":"영업부","salary":7700}
+    ]
+}
