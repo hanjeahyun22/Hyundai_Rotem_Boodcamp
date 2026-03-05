@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>* 장바구니 *</h2>
+
+{% if cart %}
+    <table border="1">
+        <tr>
+            <th>상품명</th><th>가격</th><th>수량</th><th>합계</th><th>삭제</th>
+        </tr>
+        <!-- Jinja 템플릿을 이용한 변수 선언-->
+        {% set total = 0 %}
+        {% for name, info in cart.items() %}
+            {% set subtotal = info.price * info.qty %}
+            {% set total = total + subtotal %}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{info.price}}</td>
+                <td>{{info.qty}}</td>
+                <td>{{subtotal}}</td>
+                <td><a href="/remove{{name}}">삭제</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <!-- <p>총 금액 : {{total}}원</p> -->
+    <a href="/clear">장바구니 비우기</a>
+
+{% else %}
+    <p>장바구니가 비었습니다.</p>
+
+{% endif %}
+
+{% endblock %}
