@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>* 상품 추가 *</h2>
+    {% if messages %}
+        <ul>
+            {% for m in messages %}
+                <li>{{m}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form id="add_form" action="{{url_for('add_save')}}" method="post">
+        <p>품명 : <input type="text" name="sang" id="sang"></p>
+        <p>수량 : <input name="su" id="su"></p>
+        <p>단가 : <input name="dan" id="dan"></p>
+        <button type="submit">저장</button>
+        <a href="{{url_for('show_list')}}">취소</a>
+    </form>
+
+    <!-- js 코드 호출 -->
+    <script src="{{url_for('static', filename='validate_add.js')}}"></script>
+</body>
+</html>

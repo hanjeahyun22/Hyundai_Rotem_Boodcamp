@@ -21,13 +21,20 @@ products = [
 def product_list():
     return render_template("products.html", products=products)
 
+
 # 클라이언트가 상품을 장바구니에 담음
 # 서버의 세션에 '클라이언트가 장바구니에 담은 상품' 저장
 # Flask의 특성 : 클라이언트에 '세션의 id' 정보 저장.
 @app.route("/cart")
 def show_cart():
+    # session의 key "cart" 만들기
     cart = session.get("cart", {})                      # cart : python 객체        #"cart" : session의 product
-    return render_template("cart.html", cart = cart)    # 매개변수 = 객체
+    print("cart:", cart)
+    
+    total = sum(info["price"] * info["qty"] for info in cart.values())
+    print("total:", total)
+    
+    return render_template("cart.html", cart = cart, total=total)    # 매개변수 = 객체
 
 
 @app.route("/add/<int:product_id>")
@@ -62,6 +69,31 @@ def add_to_cart(product_id):
 
     # cart에 품목을 저장하면, 장바구니를 보기 위해서 show_cart 함수를 실행.
     return redirect(url_for("show_cart"))
+
+
+# 장바구니 항목 선택 삭제
+@app.route("/remove/<item_name>")
+def remove_to_cart(item_name):
+    server_cart = session.get("cart")
+
+    if item_name in server_cart:
+        del server_cart[item_name]
+    
+    session["cart"] = server_cart
+
+    # redirect : 
+    # 본래 Routing은 Client(사용자)가 요청해야만, 밑의 함수를 실행하지만,
+    # redirect 함수를 통해서, 함수 안에서 함수를 불러서 실행.
+    return redirect(url_for("show_cart"))
+
+
+# 장바구니 전체 비우기
+@app.route("/clear")
+def clear_cart():
+    # session에 여러 개의 key 중에서, "cart"라는 key 삭제.
+    session.pop("cart", None)               # pop() : Python에서 “꺼내면서 삭제하는” 함수   -->>    가져오기 + 삭제 한번에 수행
+    return redirect(url_for("show_cart"))
+
 
 if __name__=="__main__":
     app.run(debug=True)

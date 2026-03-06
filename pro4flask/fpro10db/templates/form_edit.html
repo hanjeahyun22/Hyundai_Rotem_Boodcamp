@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>* 상품 수정 *</h2>
+    {% if messages %}
+        <ul>
+            {% for m in messages %}
+                <li>{{m}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="{{url_for('edit_save', code=row.code)}}" method="post">
+        <p>코드 : <b>{{row.code}}</b> (Primary Key는 수정 X)</p>
+        <p>품명 : <input name="sang" value="{{row.sang}}"></p>
+        <p>수량 : <input name="su" value="{{row.su}}"></p>
+        <p>단가 : <input name="dan" value="{{row.dan}}"></p>
+        <button type="submit">수정</button>
+        <a href="{{url_for('show_list')}}">취소</a>
+    </form>
+</body>
+</html>
