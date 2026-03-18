@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>사진 목록</title>
+    </head>
+    <body>
+    <h2>사진 목록 - {{ album.name }} (앨범 id: {{ album.id }})</h2>
+    <p><a href="{{ url_for('albums_list') }}">← 앨범 목록으로</a></p>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>{% for m in messages %}<li>{{ m }}</li>{% endfor %}</ul>
+        {% endif %}
+    {% endwith %}
+
+    <h3>사진 업로드</h3>
+    <form action="{{ url_for('photos_add', album_id=album.id) }}"
+            method="post" enctype="multipart/form-data">
+        <p>제목: <input name="title"></p>
+        <p>파일: <input type="file" name="photo" accept="image/*"></p>
+        <button type="submit">업로드</button>
+    </form>
+    <hr>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+        <th>id</th><th>제목</th><th>썸네일(미리보기)</th><th>작성일</th><th>관리</th>
+        </tr>
+        {% for p in photos %}
+        <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.title }}</td>
+        <td><img src="{{ url_for('static', filename=p.thumb_path) }}" width="120"></td>
+        <td>{{ p.created_at }}</td>
+        <td>
+            <a href="{{ url_for('photo_edit_form', photo_id=p.id) }}">수정</a>
+            <form action="{{ url_for('photos_delete', photo_id=p.id) }}"
+                method="post" style="display:inline;"
+                onsubmit="return confirm('이 사진을 삭제할까요?');">
+            <button type="submit">삭제</button>
+            </form>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if not photos %}
+        <p>아직 사진이 없습니다.</p>
+    {% endif %}
+</body>
+</html>

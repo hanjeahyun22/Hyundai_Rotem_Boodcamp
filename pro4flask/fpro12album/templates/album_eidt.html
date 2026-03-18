@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>앨범 수정</title>
+    </head>
+    <body>
+    <h2>앨범 수정</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>{% for m in messages %}<li>{{ m }}</li>{% endfor %}</ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('albums_edit_save', album_id=album.id) }}" method="post">
+        <p>앨범 id: <b>{{ album.id }}</b></p>
+        <p>이름: <input name="name" value="{{ album.name }}"></p>
+        <button type="submit">저장</button>
+        <a href="{{ url_for('albums_list') }}">취소</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>담당 고객 정보</h2>
+    
+    <p>직원 : <b>{{empname}}</b> ({{empno}})</p>
+
+    <table border="1">
+        <tr>
+            <th>고객 번호</th><th>고객 이름</th><th>고객 전화</th>
+        </tr>
+        <!-- cusomers가 있는 경우 -->
+        {% if customers %}
+            {% for c in customers %}
+                <tr>
+                    <td>{{c.gogekno}}</td><td>{{c.gogekname}}</td><td>{{c.gogektel}}</td>
+                </tr>
+            {% endfor %}
+        <!-- cusomers가 없는 경우 -->
+        {% else %}
+            <tr>
+                <td colspan="=3">담당 고객이 없어요</td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <p><a href="{{url_for('jikwon_list')}}">직원목록으로</a></p>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>앨범 목록</title>
+    </head>
+    <body>
+    <h2>앨범 목록</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for m in messages %}
+            <li>{{ m }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+<h3>앨범 추가</h3>
+<!-- flash("메시지")로 플래시 메시지 저장소(세션기반)에 넣어둔 값을 꺼내 읽기. 1회용 -->
+    <form action="{{ url_for('albums_add') }}" method="post">
+        <input name="name" placeholder="앨범 이름">
+        <button type="submit">추가</button>
+    </form>
+    <hr>
+    <table border="1" cellpadding="6" cellspacing="0">
+        <tr><th>id</th><th>앨범명(카테고리)</th><th>생성일</th><th>관리</th></tr>
+        {% for a in albums %}
+        <tr>
+        <td>{{ a.id }}</td>
+        <!-- 앨범 속 사진 목록 보기 -->
+        <td><a href="{{ url_for('photos_list', album_id=a.id) }}">{{ a.name }}</a></td>
+        <td>{{ a.created_at }}</td>
+        <td>
+            <!-- 앨범속 사진 보기 전에 앨범명 수정, 삭제부터 먼저 작업하자 -->
+            <a href="{{ url_for('albums_edit_form', album_id=a.id) }}">수정</a>
+            <form action="{{ url_for('albums_delete', album_id=a.id) }}"
+                method="post" style="display:inline;"
+                onsubmit="return confirm('앨범을 삭제할까요? (사진이 있으면 삭제 불가)');">
+            <button type="submit">삭제</button>
+            </form>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p style="margin-top:12px;">※ 앨범 이름을 클릭하면 해당 앨범의 사진 목록으로 이동</p>
+</body>
+</html>

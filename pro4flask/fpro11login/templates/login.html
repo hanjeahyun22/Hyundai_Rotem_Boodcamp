@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>직원 로그인</h2>
+
+    {% with messages = get_flashed_messages() %}
+        <!-- flash 메세지 출력 관련 코드-->
+        {% if messages %}
+            <ul>
+                {% for m in messages %}
+                    <li>{{m}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- 로그인 정보는 노출되면 안되기 때문에, POST 방식 사용 -->
+    <form action="{{url_for('login_post')}}" method="post">
+        <p>직원번호 : <input type="text" name="jikwonno"></p>
+        <p>직원이름 : <input type="text" name="jikwonname"></p>
+        <button type="submit">로그인</button>
+    </form>
+</body>
+</html>

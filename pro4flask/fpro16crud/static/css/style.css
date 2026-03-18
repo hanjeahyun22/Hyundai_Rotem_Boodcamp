@@ -1,0 +1,21 @@
+.panel{
+    margin: 10px 0;  padding: 16px;  border: 1px solid #ddd;
+}
+
+/* 버튼 묶음 */
+.btns{
+    margin-top: 10px;  display: flex;  flex-wrap: wrap;  gap: 10px;
+}
+
+/* 메시지 영역 */
+.msg{
+    margin-top: 12px;  padding: 10px 12px;  border: 1px dashed #bbb;
+    display: flex;  align-items: center;
+}
+
+/* JS에서 메시지 종류별 클래스를 붙일 수 있게 준비 */
+.msg.ok{ border-style: solid; }
+.msg.error{ border-style: solid; }
+
+/* 안내 문구 */
+.hint{ margin-top: 10px; font-size: 13px; opacity: 0.85; }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="/static/css/style.css"> -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+    <!-- defer : HTML Passing을 다 끝낸 후에, JavaScript를 실행하도록 순서 명시. -->
+    <script src="{{url_for('static', filename='js/app.js')}}" defer></script>
+</head>
+<body>
+    <h2>FASLK API + Ajax(fetch) GET 방식</h2>
+
+    <div>
+        <div>
+            <label for="name">이름</label>
+            <input id="name" type="text" value="길동" />
+        </div>
+        
+        <div>
+            <label for="age">나이</label>
+            <input id="age" type="number" value="23" min="1" />
+        </div>
+
+        <button id="sendBtn">GET(REST) 요청</button>
+    </div>
+
+    <!-- 결과 출력 (버튼 모양만 만들고, JavaScript 사용 예정) -->
+    <div id="result"></div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!-- [문항11] 다음과 같은 가)함수 선언식과 나)함수 표현식(리터럴)의 방법으로 동일한 a함수를 생성할 때 차이점을 간략하게 서술하시오.
+
+가) function a(){}
+나) let a = function () {} (배점:10)
+*/
+
+// 가) 선언식 : 어디서든 함수 호출 가능
+// 나) 표현식 : 표현한 뒤, 즉 코드 아래에서만 사용 가능
+
+
+/*
+	
+[문항12] 다음과 같은 버튼에 click 이벤트를 설정 했을 때, ‘hello’ 문자열을 콘솔(console)에 출력하는 함수(함수 명은 func)를 작성하시오.
+(배점:10)
+예>
+
+// 문서 로딩이 완료되면 버튼에 이벤트 핸들러(onclick)를 장착하고 func 함수를 호출하자.
+
+
+...
+<button  id=”btn”>hello출력</button> -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+</head>
+<body>
+    <script>
+        window.onload = () => {
+
+            // document.getElementById("btn").addEventListener("click", func);
+            const func = document.querySelector("#sel");
+            func.onclick = function (){
+                colsole.log("hello")
+            }
+        };
+    </script>
+    <h3>버튼 : 마우스 오버, 아웃 CSS 기본 탑재</h3>
+    <button  id=”btn”>hello출력</button>
+    <br>
+</body>
+</html> -->
+
+
+<!-- [문항13] const scores = [85, 92, 78, 90, 88];
+scores 배열에 저장된 점수들의 총점을 계산하는 프로그램을 작성하시오.
+for문을 사용하여 배열의 모든 요소를 더한 후 결과를 출력하시오.
+출력 결과는 아래와 같이 한다.
+총점 : 433
+
+조건 : let hap = 0; <== 점수의 합 변수
+(배점:10) -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // window.onload = () => {
+        //     const scores = [85, 92, 78, 90, 88];    
+        //     let hap=0;
+        //         for(i in scores){
+                    
+        //             hap += i;
+        //         }
+        //         document.write(hap)
+        //     }
+        const scores = [85, 92, 78, 90, 88];    
+        let hap=0;
+
+        for(i in scores){
+                            
+                            hap += scores[i];
+                        }
+        document.write(hap)
+    </script>
+    
+</body>
+</html> -->
+
+
+
+<!-- [문항14] 다음과 같이 순서 있는 리스트를 작성하기 위한 HTML 코드를 작성하시오.
+
+1. 사과
+2. 배
+3. 복숭아 (배점:10) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<ol>
+    <li>사과</li>
+    <li>배</li>
+    <li>복숭아</li>
+</ol>
+</body>
+</html>
