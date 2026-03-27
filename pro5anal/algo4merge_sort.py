@@ -46,7 +46,38 @@ print(merge_sort(d))
 
 
 print("\n-------------- 방법2) 일반적인 알고리즘 작성 방식 기존의 d 배열만 사용 --------------")
-import numpy as np
+# 재귀호출이 정렬된 리스트를 반환
+# 병합도 새 리스트를 만들어 반환
+# 원본 리스트는 그대로이고, 정렬된 결과는 새 리스트에 저장
 d = [6, 8, 3, 1, 2, 4, 7, 5]
-temp = np.zeros(1,len(d))
-print(temp)
+
+def merge_sort2(a):
+    if len(a) <= 1:
+        return a
+    
+    mid = len(a) // 2
+    group_left = merge_sort2(a[:mid])
+    group_right = merge_sort2(a[mid:])
+
+    result = []
+    i = 0           # group_left의 index
+    j = 0           # group_right의 index
+
+    # 병합
+    while i < len(group_left) and j < len(group_right):
+        if group_left[i] < group_right[j]:
+            result.append(group_left[i])
+            i += 1
+        else:
+            result.append(group_right[j])
+            j += 1
+
+    # 남은 요소 추가
+    result += group_left[i:]
+    result += group_right[j:]
+
+    return result
+
+
+sorted_d = merge_sort2(d)
+print(sorted_d)
