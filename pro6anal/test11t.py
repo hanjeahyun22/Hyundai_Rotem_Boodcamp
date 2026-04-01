@@ -75,3 +75,22 @@ print("맑은날의 매출액 : ", tg1.mean())      # 761040.2542372881
 print("비가오는날의 매출액 : ", tg2.mean())  # 757331.5217391305
 plt.boxplot([tg1, tg2], meanline=True, showmeans=True, notch=True)
 plt.show()
+
+# 정규성 검정
+print(len(tg1), " ", len(tg2))  # 236   92
+print(stats.shapiro(tg1).pvalue)  # 0.05605
+print(stats.shapiro(tg2).pvalue)  # 0.88275
+# [판정] 두 집단 모두 p-value > 0.05 이므로 정규성을 만족함.
+
+# 등분산성 검정
+print(stats.levene(tg1, tg2).pvalue)  # 0.7123
+# [판정] p-value(0.7123) > 0.05 이므로 등분산성을 만족함.
+
+# 독립표본 t-검정 수행
+result = stats.ttest_ind(tg1, tg2, equal_var=True)
+print(f"t-통계량: {result.statistic:.4f}")  # 0.1011
+print(f"p-value: {result.pvalue:.4f}")      # 0.9195
+
+# [최종 판정] 유의수준 0.05 기준
+# p-value(0.9195) >= 0.05 이므로 귀무가설을 채택한다.
+# 결론: 강수 여부에 따른 매출액 평균에 유의미한 차이가 없다.
