@@ -225,7 +225,7 @@ $RECYCLE.BIN/
 # =========================================================
 
 # TensorFlow datasets, generated files, model artifacts
-tensorflow/
+
 tf
 *.keras
 *.h5
