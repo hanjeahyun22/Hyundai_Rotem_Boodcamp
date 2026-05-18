@@ -220,4 +220,21 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# =========================================================
+# Project local / large ML files
+# =========================================================
+
+# TensorFlow datasets, generated files, model artifacts
+tensorflow/
+tf
+*.keras
+*.h5
+*.pt
+*.pth
+*.onnx
+
+# Local system/temp folder
+sys
+
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,visualstudiocode
