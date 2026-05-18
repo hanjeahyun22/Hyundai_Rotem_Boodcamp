@@ -39,7 +39,7 @@
 # 3. numpy: 수치 계산 및 배열 처리를 위한 라이브러리
 # 4. matplotlib: 데이터 시각화를 위한 라이브러리
 import os
-os.system("cls")
+os.system("clear")
 
 import numpy as np
 import matplotlib.pyplot as plt
