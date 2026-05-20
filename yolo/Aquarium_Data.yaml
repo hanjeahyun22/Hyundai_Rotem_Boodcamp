@@ -1,0 +1,12 @@
+names:
+- fish
+- jellyfish
+- penguin
+- puffin
+- shark
+- starfish
+- stingray
+nc: 7
+test: Aquarium Combined.v2-raw-1024.yolov8//test/images
+train: Aquarium Combined.v2-raw-1024.yolov8//train/images
+val: Aquarium Combined.v2-raw-1024.yolov8//valid/images
