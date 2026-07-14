@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 7
+names: ['fish', 'jellyfish', 'penguin', 'puffin', 'shark', 'starfish', 'stingray']
+
+roboflow:
+  workspace: roboflow-100
+  project: aquarium-qlnqy
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/roboflow-100/aquarium-qlnqy/dataset/1

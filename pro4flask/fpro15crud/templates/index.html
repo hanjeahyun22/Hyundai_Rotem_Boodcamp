@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/static/js/myapp.js" defer></script>
+</head>
+<body>
+    <h2>상품 CRUD(sangsata table)</h2>
+    코드 : <input id="code"><br>
+    품명 : <input id="sang"><br>
+    수량 : <input id="su"><br>
+    단가 : <input id="dan"><br>
+    <br>
+    <button id="btnAdd">추가</button>
+    <button id="btnUpdate">수정</button>
+    <button id="btnDelete">삭제</button>
+    <button id="btnReload">조회</button>
+    <br><br>
+    <div id="msg"></div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>코드</th><th>품명</th><th>수량</th><th>단가</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            
+        </tbody>
+    </table>
+</body>
+</html>

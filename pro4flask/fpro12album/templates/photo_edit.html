@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>사진 수정</title>
+    </head>
+    <body>
+    <h2>사진 수정</h2>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>{% for m in messages %}<li>{{ m }}</li>{% endfor %}</ul>
+        {% endif %}
+    {% endwith %}
+
+    <p>사진 id: <b>{{ photo.id }}</b> / 앨범 id: {{ photo.album_id }}</p>
+    <p>
+        현재 이미지(썸네일):<br>
+        <img src="{{ url_for('static', filename=photo.thumb_path) }}" width="180">
+    </p>
+
+    <form action="{{ url_for('photo_edit_save', photo_id=photo.id) }}"
+            method="post" enctype="multipart/form-data">
+    <!-- 
+        form tag 에서 파일 업로드를 가능하게 하는 '전송 방식 지정'이다.
+        파일(input type="file")이 포함된 폼은 이걸 써야 서버에서 request.files로 파일을 받을 수 있다.    
+        -->
+        <p>제목: <input name="title" value="{{ photo.title }}"></p>
+        <p>
+        파일 교체(선택): <input type="file" name="photo" accept="image/*">
+    <!--
+        accept= 파일 선택창에서 '이미지 파일만 고르도록' 필터를 걸어주는 옵션.
+        image/* : PNG, JPG, GIF, WEBP 같은 이미지 MIME 타입 전체
+        -->
+        <br><small>파일을 선택하지 않으면 제목만 변경됩니다.</small>
+        </p>
+
+        <button type="submit">저장</button>
+        <a href="{{ url_for('photos_list', album_id=photo.album_id) }}">취소</a>
+    </form>
+</body>
+</html>

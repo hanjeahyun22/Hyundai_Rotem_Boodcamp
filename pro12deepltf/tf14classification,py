@@ -1,0 +1,186 @@
+# 딥러닝으로 이진 분류 - 전통적 방식인 LogisticRegression의 확장
+
+import os
+os.system("cls")
+
+
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Input
+from tensorflow.keras.optimizers import Adam
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+tf.keras.utils.set_random_seed(42)
+
+# 1) 데이터 준비 (리스트 괄호 에러 수정)
+x_data = np.array([[1,2], [2,3], [3,4], [4,3], [3,2], [2,1]])
+y_data = np.array([[0], [0], [0], [1], [1], [1]], dtype=np.float32)
+
+# 2) 모델 네트워크 설정
+
+print("1) Sequential API 버전 (빠른 구현)")
+# 층을 순서대로 쌓는 단순 구조
+# 분기 구조나 다중 입출력
+# model = Sequential([
+#     Input(shape=(2,)),
+#     Dense(1, activation='sigmoid')
+# ])
+
+model = Sequential()
+model.add(Input(shape=(2, )))                     # 입력 특성 2개 (x1, x2)
+model.add(Dense(units=4, activation='relu'))     # 은닉층: 노드 4개, ReLU 활성화 함수
+model.add(Dense(units=1, activation='sigmoid'))  # 출력층: 이진 분류를 위한 Sigmoid (0~1 사이 확률값)
+print(model.summary())
+
+# 3) 모델 학습 과정 설정
+model.compile(
+    optimizer=Adam(learning_rate=0.01),         # Adam: 가중치 업데이트 최적화 알고리즘
+    loss='binary_crossentropy',                 # BCE: 실제값(0 or 1)과 예측 확률 사이의 거리를 계산하는 손실 함수
+                                                # 예측이 틀릴수록 로그 함수에 의해 손실값이 기하급수적으로 커짐
+    metrics=['accuracy']                        # 평가지표: 정확도
+)
+
+model.fit(x_data, y_data, epochs=20, batch_size=1, verbose=0)
+
+m_eval = model.evaluate(x_data, y_data)
+print(m_eval)
+
+print(f"평가 결과 : 손실={m_eval[0]:.4f}, 정확도={m_eval[1]:.4f}")
+
+# 손실을 최소화하기 위해, 경사하강법 사용
+# [이진 분류의 수학적 흐름 및 이론 설명]
+# 1. 선형 결합 (Linear Combination): z = W · x + b
+#    - 입력 값(x)에 가중치(W)를 곱하고 편향(b)을 더해 선형 회귀와 같은 예측값 z를 산출합니다.
+# 2. 활성화 함수 (Activation - Sigmoid): y_hat = 1 / (1 + e^(-z))
+#    - z값을 0과 1 사이의 확률값(y_hat)으로 변환합니다. 0.5보다 크면 1, 작으면 0으로 분류합니다.
+# 3. 손실 함수 (Loss Function - Binary Cross Entropy):
+#    - Loss = -[y*log(y_hat) + (1-y)*log(1-y_hat)]
+#    - 실제값(y)과 예측 확률(y_hat)의 차이를 계산합니다. 틀린 예측일수록 손실값이 무한대에 가깝게 커집니다.
+# 4. 역전파 (Backpropagation):
+#    - 미분의 연쇄 법칙(Chain Rule)을 이용해 손실(Loss)에 대한 W와 b의 기울기(Gradient)를 구합니다.
+#    - 이진 분류에서 최종 미분값은 (y_hat - y) 형태의 단순한 오차값으로 도출되어 계산 효율이 높습니다.
+# 5. 가중치 업데이트 (Optimizer - Adam/SGD):
+#    - W = W - (Learning Rate * Gradient)
+#    - 구해진 기울기의 반대 방향으로 가중치를 조금씩 수정하여 손실이 최소가 되는 지점을 찾아갑니다.
+
+
+# 예측값과 실제값으로 시각화(S곡선 형태)
+import matplotlib.pyplot as plt
+# 2차원 input(x1, x2)을 가진 모델을 1차원 처럼 만들어서 시그모이드(S곡선)를 보기 위한 준비
+
+x1_range = np.linspace(0, 6, 100)
+x2_fixed = 2.5
+
+# input 데이터 생성 -> 두 배열을 합쳐서 (x1, x2) 쌍 만들기
+x_vis = np.column_stack([x1_range, np.full_like(x1_range, x2_fixed)])
+
+y_prob = model.predict(x_vis, verbose=0)        # x1 변화에 따른 출력 확률
+
+x1_real = x_data[:, 0]
+y_real = y_data.ravel()
+
+plt.figure(figsize=(7, 5))
+plt.plot(x1_range, y_prob, label="sigmoid curve")
+plt.scatter(x1_real, y_real, label="real data", color="red")
+plt.legend()
+plt.grid(True)
+plt.xlabel("x1 data")
+plt.ylabel("y : probability")
+plt.show()
+
+from sklearn.metrics import accuracy_score
+pred = model.predict(x_data, verbose=0)
+pred_class = (pred >= 0.5).astype(int)
+accuracy = accuracy_score(y_data, pred_class)
+print("Accuracy:", accuracy)
+
+# 새로운 값으로 분류 예측
+new_data = np.array([[1, 2], [10, 5]], dtype=np.float32)
+pred = model.predict(new_data, verbose=0)
+print("예측 확률 : ", pred.ravel())
+
+print("예측 결과 : ", (pred >= 0.5).astype(int).ravel())
+print("예측 결과 : ", [1 if x >= 0.5 else 0 for x in pred.ravel()])
+print("예측 결과 : ", np.where(pred >= 0.5, 1, 0).ravel())
+
+
+print("2) Functional API 버전 (실무에서 주로 사용)")
+# 다중 입출력 가능
+# 구조 유연 -> 복잡한 모델에 효과적
+
+from tensorflow.keras.models import Model
+inputs = Input(shape=(2,))
+outputs = Dense(units=4, activation='relu')(inputs)
+outputs = Dense(units=1, activation='sigmoid')(outputs)
+model_func = Model(inputs=inputs, outputs=outputs)
+print(model_func.summary())
+
+model_func.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.01), metrics=['accuracy'])
+m_eval2 = model_func.fit(x_data, y_data, epochs=20, batch_size=1, verbose=0)
+
+print(m_eval2)
+print(f"평가 결과 2 : 손실={m_eval2.history['loss'][-1]:.4f}, 정확도={m_eval2.history['accuracy'][-1]:.4f}")
+
+
+print("\n2-1) Functional API 버전2 (다중 입력)")
+# 이전 버전 : [x1, x2] -> Dense -> Dense -> 출력
+# 다중 입력 : 입력을 따로 받아서 각각 특징을 뽑아 합치는 방식   ->  각각 따로 전처리 가능
+# x1 -> Dense
+#               -> concat   -> Dense    -> 출력
+# x2 -> Dense
+
+from tensorflow.keras.layers import Concatenate
+
+# 입력 분리
+input1 = Input(shape=(1,))
+input2 = Input(shape=(1,))
+
+# 각각 처리
+x1 = Dense(units=2, activation='relu')(input1)
+x2 = Dense(units=4, activation='relu')(input2)
+
+# 합치기
+merged = Concatenate()([x1, x2])
+
+
+output = Dense(units=1, activation='sigmoid')(merged)
+
+multi_model = Model(inputs=[input1, input2], outputs=output)
+print(multi_model.summary())
+
+multi_model.compile(loss="binary_crossentropy", optimizer=Adam(learning_rate=0.01), metrics=['accuracy'])
+
+# 데이터를 분리해서 입력
+x1_data = x_data[:, 0].reshape(-1, 1)
+x2_data = x_data[:, 1].reshape(-1, 1)
+
+multi_model.fit([x1_data, x2_data], y_data, epochs=20, batch_size=1, verbose=0)
+m_eval2_multi = multi_model.evaluate([x1_data, x2_data], y_data, verbose=0)
+print(m_eval2_multi)
+print(f"평가 결과 3 : 손실={m_eval2_multi[0]:.4f}, 정확도={m_eval2_multi[1]:.4f}")
+
+
+print("\n3) Model Subclassing 방식(완전 자유로운 형태 - 프로그래머 능력 중요)")
+class MyModel(Model):
+    def __init__(self):
+        super(MyModel, self).__init__()
+        
+        # 레이어 정의
+        self.dense1 = Dense(units=4, activation='relu')
+        self.dense2 = Dense(units=1, activation='sigmoid')
+
+    # forward 연산 정의
+    def call(self, inputs):
+        x = self.dense1(inputs)
+        return self.dense2(x)
+
+sub_model = MyModel()
+
+sub_model.build(input_shape=(None, 2))
+print(sub_model.summary())
+sub_model.compile(loss="binary_crossentropy", optimizer=Adam(learning_rate=0.01), metrics=['accuracy'])
+m_eval_sub = sub_model.fit(x_data, y_data, epochs=20, batch_size=1, verbose=0)
+print(m_eval_sub)
+print(f"평가 결과 4 : 손실={m_eval_sub.history['loss'][-1]:.4f}, 정확도={m_eval_sub.history['accuracy'][-1]:.4f}")

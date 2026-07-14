@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- AXIOS cdn(content deliverly network) -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h3>AJAX 3가지 방식 비교</h3>
+    <button id="btn1">1) fetch then</button>
+    <button id="btn2">2) async fetch</button>
+    <button id="btn3">3) axios</button>
+    <hr>
+    <div id="result">
+        <script>
+            document.querySelector("#btn1").onclick = funcFetch;
+            document.querySelector("#btn2").onclick = funcAsync;
+            document.querySelector("#btn3").onclick = funcAxios;
+
+            // 1. fetch + then 방식
+            function funcFetch(){
+                // alert("A");
+                fetch("sangpum.json")
+
+                    .then(response => {
+                        // response.ok가 없는 경우
+                        if(!response.ok){
+                            throw new Error("서버 오류");
+                        }
+                        return response.json();
+                    })
+
+                    .then(data => {
+                        let output = "<b>fetch then 결과</b><br>";
+                        data.forEach(item => {
+                            output += "코드 : " + item.code + " / 품명 : " + item.sang + "<br>";
+                        });
+                        document.getElementById("result").innerHTML = output;
+                    })
+
+                    .catch(error => {
+                        document.getElementById("result").innerHTML = "에러 발생 : " + error;
+                    })
+            }
+
+            // 2. async + await fetch 방식
+            async function funcAsync(){
+                // alert("B");
+                try{
+                    const response = await fetch("sangpum.json");
+                    
+                    if(!response.ok){
+                            throw new Error("서버 오류");
+                    }
+                    const data = await response.json();
+
+                    let output = "<b>async await 결과</b><br>";
+                    data.forEach(item => {
+                        output += "코드 : " + item.code + " / 품명 : " + item.sang + "<br>";
+                    });
+                    document.getElementById("result").innerHTML = output;
+                }
+                catch(error){
+                    document.getElementById("result").innerHTML = "에러 발생 : " + error;
+                }
+            }
+
+            // 3. axios 방식
+            async function funcAxios(){
+                // alert("C");
+                try{
+                    const response = await axios.get("sangpum.json");
+                    const data = response.data;         // json 처리를 해 줌.
+
+                    let output = "<b>axios 결과</b><br>";
+                    data.forEach(item => {
+                        output += "코드 : " + item.code + " / 품명 : " + item.sang + "<br>";
+                    });
+                    document.getElementById("result").innerHTML = output;
+                }
+                catch(error){
+                    document.getElementById("result").innerHTML = "에러 발생 : " + error;
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

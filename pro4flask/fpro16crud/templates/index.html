@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <title>MariaDB + Flask CRUD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- API base를 템플릿에서 주입(하드코딩 방지) -->
+    <script>
+    // app.py의 @app.get("/api/sangdata") 했으므로 /api/sangdata가 됨
+    // app.py의 @app.get("/sangdata") 하면 /sangdata가 됨
+        window.API_LIST = "{{ url_for('list_sangdata') }}"; 
+    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+    <h2>상품 CRUD (sangdata)</h2>
+    <section class="panel">
+        <h2>입력/수정 폼</h2>
+        <div>
+        <label>코드:</label>
+        <input id="code" type="number" placeholder="1">
+        <br>
+        <label>품명:</label>
+        <input id="sang" type="text" placeholder="연필">
+        <br>
+        <label>수량:</label>
+        <input id="su" type="number" placeholder="10">
+        <br>
+        <label>단가:</label>
+        <input id="dan" type="number" placeholder="500">
+        </div>
+
+        <div class="btns">
+        <button id="btnAdd">추가(POST)</button>
+        <button id="btnUpdate">수정(PUT)</button>
+        <button id="btnDelete">삭제(DELETE)</button>
+        <button id="btnClear">초기화</button>
+        <button id="btnReload">전체조회(GET)</button>
+        </div>
+        <div id="msg" class="msg">메시지 영역</div>
+    </section>
+
+    <section class="panel">
+        <h2>전체 목록</h2>
+        <table>
+        <thead>
+            <tr><th>코드</th><th>품명</th><th>수량</th><th>단가</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+        </table>
+        <p class="hint">행을 클릭하면 폼에 값이 채워짐. (수정/삭제 편하게)</p>
+    </section>
+</body>
+</html>

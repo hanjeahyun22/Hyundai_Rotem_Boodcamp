@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    조건 판단문 if<br>
+    <script>
+        // // promt : 키보드로 input 값을 직접 받음. -> python의 input기능과 동일
+        // let avg = prompt("평균 점수 입력 : ", "80");
+        // document.write("ave : ", avg);
+        let avg = 85;
+        if (avg >= 90)
+            document.write("점수 : ", avg, " -- <b style = 'color:blue'>우수</b>");
+        else if (avg >= 70) {
+            // 수행 할 명령문이 복수 일 경우, 중괄호 안에 작성
+            document.write("점수 : ", avg, " -- <b style = 'color:green'>보통</b>");
+            document.write("&nbsp;&nbsp;와우")
+        }
+        else
+            document.write("점수 : ", avg, " -- <b style = 'color:red'>저조</b>");
+    </script>
+    <br>조건 판단문 switch<br>
+    <script>
+        let result = "D"        // 학점 기억 변수
+        switch (result){
+            case "A" : {
+                document.write("매우 우수");
+                document.write("good");
+                break;                                              // javascript는 Python과 달리, tab으로 영역 구분X --> break를 통해서 case구문의 실행 부분 구분
+            }
+            case "B" : document.write("우수"); break;
+            case "C" : document.write("보통"); break;
+            // case "D" : document.write("저조"); break;
+            case "D" :                                              // result=="D" -> 밑으로 내려가서 "불량"을 출력하고 break
+            case "F" : document.write("불량"); break;
+            default:document.write("기타"); break;                  // default : if문의 Else와 동일한 의미
+        }
+    </script>
+</body>
+</html>

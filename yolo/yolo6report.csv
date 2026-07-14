@@ -1,0 +1,8 @@
+﻿image,object_count,classes,avg_confidence
+image2.jpg,4,"handbag, person",0.571
+image1.jpg,2,person,0.639
+image3.jpg,6,"car, motorcycle, person",0.644
+street_dog.jpg,1,dog,0.924
+petimage.jpg,4,dog,0.578
+street_cat.jpg,3,"cat, dog",0.689
+dog.jpg,2,dog,0.707

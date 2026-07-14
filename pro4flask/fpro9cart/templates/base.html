@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- title이 있으면 쓰고, 없으면 "장바구니 샘플" 제목 사용 -->
+    <title>{{title if title else "장바구니 샘플"}}</title>
+</head>
+<body>
+    <nav>
+        <a href="/">상품목록</a> | <a href="/cart">장바구니</a>
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

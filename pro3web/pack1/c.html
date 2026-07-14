@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>--- table(표) tag ---</h1><br>                  <!--- <tr>, <td> 태그는 <table> 태그 안에서만 사용 가능-->
+    <table border="1">
+    <tr>
+        <th>번호</th><th>이름</th><th>주소</th>           <!-- Column 제목-->
+    </tr>
+        <tr>
+        <td width="100">1</td><td>가나다</td><td>강남구 역삼동</td>
+    </tr>
+    <tr>
+        <td>2</td><td></td><td></td>
+    </tr>
+    </table>
+    <hr>
+    <h2>--- 열병합, 행병합 ---</h2><br>
+    <table  width="200" border="1">
+        <tr>
+            <td colspan="2">a</td>
+            <td>b</td>
+            <td rowspan="2">c</td>
+        </tr>
+        <tr>
+            <td>d</td>
+            <td>cell(셀))</td>
+            <td>
+                <table border="2">
+                    <td>kor</td>
+                    <td>eng</td>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <hr>
+    <h1>--- form tag (자료 입력용 태그) ---</h1><br>
+    <form method="get">
+        1. 이름 : <input type="text" name="name" id="irum" value="이기자" size="30" readonly><br>
+        2. 비밀번호 : <input type="password" name="pwd" /><br>
+        3. 메세지 : <textarea name="msg" cols="50" rows="5">멀티라인(여러줄로 입력할 수 있는 text 박스)</textarea><BR>
+        <!--radio : 선택지 중에서 반드시 하나 선택, 중복 선택  X -->
+        4. 학년 :   <input type="radio" name="hak" value="1" checked>1학년
+                    <input type="radio" name="hak" value="2" checked>2학년
+                    <input type="radio" name="hak" value="3" checked>3학년
+                    <input type="radio" name="hak" value="4" checked>4학년
+        <br>
+        <!-- checkbox : 여러 선택지 중에서 선택, 중복 선택  O-->
+        5. 과목 :   <input type="checkbox" name="gwa" value="python">파이썬&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="gwa" value="c">c언어&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="gwa" value="java">자바&nbsp;&nbsp;&nbsp;<br>
+        <!-- multiple -->
+        6. 지역 :   <select name="addr">
+                        <option value="c" selected>시청</option>
+                        <option value="j" selected>종로</option>
+                        <option value="k" selected>강남</option>
+                    </select>
+                    <br>
+        7. <input type="file" name="fname"><br>
+        <!-- hidden : 값을 전송은 하고 싶지만, 화면에는 출력하지 않도록 함.-->
+        8. 숨김 : <input type="hidden" name="ji" value="대한민국" />
+        <br>
+        <input type="submit" value="전송 확인">
+        <input type="reset" value="입력 취소">
+    </form>
+</body>
+</html>

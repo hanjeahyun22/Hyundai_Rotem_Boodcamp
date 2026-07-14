@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>연봉 예측</title>
+
+    <!-- axios 라이브러리 불러오기 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h2>근무년수 -> 예상 연봉(LinearRegression)</h2>
+
+    <!-- 사용자가 근무년수를 입력하는 영역 -->
+    근무년수 : <input type="text" id="years" value="3">
+    <button type="button" id="btn">확인</button>
+
+    <!-- 예측 결과 출력 영역 -->
+    <div style="margin-top:15px; background:#f3f3f3; width:280px; padding:10px;">
+        <div><b>예상연봉액 : <span id="predArea">{{ pred }}</span></b></div>
+        <div>설명력(R²) : <b><span id="r2Area">{{ r2 }}</span>%</b></div>
+        <div>회귀식 : <b>pay = <span id="coefArea">{{ coef }}</span> * years + <span id="interceptArea">{{ intercept }}</span></b></div>
+    </div>
+
+    <!-- 직급별 평균 연봉 출력 영역 -->
+    <h3>직급별 연봉평균</h3>
+    <table border="1">
+        <tr>
+            <th>직급</th>
+            <th>평균 연봉</th>
+        </tr>
+
+        <!-- Flask에서 전달한 직급별 평균 연봉 데이터를 반복 출력 -->
+        {% for row in jik_avg %}
+        <tr>
+            <td>{{ row['jikwonjik'] }}</td>
+            <td>{{ "{:,.0f}".format(row['avg_pay']) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        // 확인 버튼 클릭 시 실행
+        document.getElementById('btn').addEventListener('click', function () {
+
+            // 입력한 근무년수 값 읽기
+            const years = document.getElementById('years').value;
+
+            // axios를 사용해 서버의 /predict 주소로 POST 요청 전송
+            // JSON 형태로 years 값을 보냄
+            axios.post('/predict', {
+                years: years
+            })
+            .then(function(response) {
+                // 서버가 보낸 응답 데이터 확인
+                console.log('서버 응답:', response.data);
+
+                // 응답받은 예측 결과를 화면에 출력
+                document.getElementById('predArea').textContent = response.data.pred;
+                document.getElementById('r2Area').textContent = response.data.r2;
+                document.getElementById('coefArea').textContent = response.data.coef;
+                document.getElementById('interceptArea').textContent = response.data.intercept;
+            })
+            .catch(function(error) {
+                // 서버 요청 실패 시 실행
+                console.error('오류 발생:', error);
+                alert('오류 발생');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+<title>{% block title %}조건문(condition.html){% endblock %}</title>
+
+{% block content %}
+    <h3>조건 연습</h3>
+    
+    {% if score >= 90 %}
+        <p>성적 : {{score}} -> a 등급</p>
+    {% elif score >= 80 %}
+        <p>성적 : {{score}} -> b 등급</p>
+    {% else %}
+        <p>성적 : {{score}} -> c 등급</p>
+    {% endif %}
+{% endblock %}

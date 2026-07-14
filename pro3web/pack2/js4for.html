@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>반복문 for(조기값; 조건; 증가값)</h1> <br>
+    <script>
+        let a  = -1
+        for(a  = 1; a <= 5; a +=1){
+            document.write("a 값은 " + a + "<br>");
+        }
+        document.write("for 블럭 수행 후 a 값은 " + a + "<br>")
+        
+        for(let a  = 5; a >= 1; a--){
+            document.write("a 값은 " + a + "<br>");
+        }
+
+        document.write("<br>")
+        for(let a  = 3; a < 11; a+=2){
+            document.write("a 값은 " + a + "<br>");
+        }
+
+        document.write("<br>다중 for<br>")
+        for(let i  = 1; i <= 3; i++){
+            document.write("i 값은 " + i + " : &nbsp;&nbsp;");
+            for (let j = 1; j <= 4; j++){
+                document.write("j 값은 " + j + "&nbsp;&nbsp;");
+            }
+            document.write("<br>");
+        }
+
+        document.write("<br>1~10까지의 정수 합은?<br>");
+        let hap = 0;
+        for (let su = 1; su <= 10; su++){
+            hap += su;
+        }
+        document.write("합 : ",hap);
+
+        document.write("<hr>1~100까지의 정수 중, 2의 배수 이나, 5의 배수가 아닌 수의 합 출력<br>");
+        let Sum = 0;
+        // for (i = 0; i <= 100; i+=2){
+        //     if (i % 5==0)
+        //         continue;
+        //     Sum += i;
+        // }
+        for (let i = 0; i <= 100; i+=1){
+            // if (i % 2 == 0 && i % 5 != 0){
+            // ==는 느슨한 동등 비교로, 타입을 자동 변환하여 값만 비교
+            // === 는 엄격한 일치 비교로, 값과 데이터 타입이 모두 같아야 true를 반환
+            if (i % 2 === 0 && i % 5 !== 0){
+                Sum += i;
+            }
+        }
+        document.write("합 : ",Sum);
+
+        document.write("<hr>2 ~ 9 구구단 출력 - table에 출력<br>");
+        document.write("<table border = '1'>");
+        for (let a = 2; a < 10; a++){
+            document.write("<tr>");
+                for (let b = 1; b < 10; b++){
+                    // document.write("<td>");
+                    // document.write(a, " * ", b, " = ", a*b);
+                    // document.write("</td>");
+                    document.write(`<td>${a}*${b}=${a*b} &nbsp;&nbsp;</td>`)                // `(backtic)' 을 활용한 ${} mapping : 템플릿 문자열
+                }
+            document.write("</tr>");
+        }
+        document.write("</table>");
+    </script>
+</body>
+</html>

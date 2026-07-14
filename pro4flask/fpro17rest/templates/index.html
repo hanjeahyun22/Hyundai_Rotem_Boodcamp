@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/static/js/app.js" defer></script>
+</head>
+<body>
+<h2>RESTful 직원/부서 정보 조회</h2>
+<hr>
+<h3>1.직원 전체 조회</h3>
+<button id="btnJikwon">전체 직원 보기</button>
+
+<h3>2.직원 1명 조회</h3>
+직원 번호 : <input id="jikwonno">
+<button id="btnOne">일부 직원 보기</button>
+
+<h3>3.부서 전체 조회</h3>
+<button id="btnBuser">전체 부서 보기</button>
+
+<h3>4.특정 부서 조회</h3>
+부서 번호 : <input id="buserno">
+<button id="btnDept">일부 부서 직원 보기</button>
+
+<hr>
+<div id="msg"></div>
+
+<h3>조회 결과</h3>
+<table border="1">
+    <thead id="thead"></thead>
+    <tbody id="tbody"></tbody>
+</table>
+</body>
+</html>

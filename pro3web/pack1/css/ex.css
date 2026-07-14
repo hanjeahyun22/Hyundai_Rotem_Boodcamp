@@ -1,0 +1,21 @@
+/* css 파일의 주석 */
+#myid2{
+    background-color: yellowgreen;
+    color: red;
+    font-size: 20px;
+}
+
+/*동적 선택자 -> ':'으로 값 부여 */
+/*input:focus{background-color: darkorange;}*/
+input:focus{background-color: rgb(100%,50%,0%);}
+
+/*a tag의 hyperlink 밑줄 없애기*/
+a:link{text-decoration: none;}
+a:hover{ color: burlywood; font-size: 30px;}
+
+/* 선택 연습 */
+b{font-size: 8px}
+div b{font-size: 11px; color: mediumaquamarine;}         /*div tag 자손들 모두 적용 --> div의 자손 <b> tag */
+div > b{font-size: 13px; color: blue;}         /*div tag 직계 자식만 적용 --> <div><span><b> 에서 <div>의 직계 자식은 <span> --> 적용 X*/
+div b#hi{font-size: 14px; color: green;}
+div b.hello{font-size: 15px; color: deeppink;}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>로그인 + 방문 횟수</h2>
+    <p><b>{{msg}}</b></p>
+    <hr>
+    {% if not name %}
+        <form action="/login" method="post">
+            <input type="text" name="name" placeholder="이름 입력">
+            <button type="submit">로그인</button>
+        </form>
+    {% else %}
+        <form action="/logout" method="post">
+            <button type="submit">로그아웃</button>
+        </form>
+    {% endif %}
+
+    <br>
+    쿠키확인 : F12(검사)    ->  Application     -> Cookies
+</body>
+</html>

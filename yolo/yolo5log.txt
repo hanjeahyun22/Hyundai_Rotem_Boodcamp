@@ -1,0 +1,36 @@
+
+2026-05-19 15:03:39 이미지 : /home/pnuav/HyundaiRotem_Bootcamp/python_source/yolo/street_ani.jpeg
+탐지된 객채 수 : 2
+ - 강아지 : box=(116, 14, 254, 146) confidence=0.90
+ - 고양이 : box=(54, 69, 123, 146) confidence=0.60
+----------------------------------------
+
+2026-05-19 15:09:52 이미지 : /home/pnuav/HyundaiRotem_Bootcamp/python_source/yolo/street_ani.jpeg
+탐지된 객채 수 : 2
+ - 강아지 : box=(116, 14, 254, 146) confidence=0.90
+ - 고양이 : box=(54, 69, 123, 146) confidence=0.60
+----------------------------------------
+
+2026-05-19 15:19:13 이미지 : /home/pnuav/HyundaiRotem_Bootcamp/python_source/yolo/street_ani.jpeg
+탐지된 객채 수 : 2
+ - 강아지 : box=(116, 14, 254, 146) confidence=0.90
+ - 고양이 : box=(54, 69, 123, 146) confidence=0.60
+----------------------------------------
+
+2026-05-19 15:19:23 이미지 : /home/pnuav/HyundaiRotem_Bootcamp/python_source/yolo/street_ani.jpeg
+탐지된 객채 수 : 2
+ - 강아지 : box=(116, 14, 254, 146) confidence=0.90
+ - 고양이 : box=(54, 69, 123, 146) confidence=0.60
+----------------------------------------
+
+2026-05-19 15:19:29 이미지 : /home/pnuav/HyundaiRotem_Bootcamp/python_source/yolo/street_ani.jpeg
+탐지된 객채 수 : 2
+ - 강아지 : box=(116, 14, 254, 146) confidence=0.90
+ - 고양이 : box=(54, 69, 123, 146) confidence=0.60
+----------------------------------------
+
+2026-05-19 15:23:14 이미지 : /home/pnuav/HyundaiRotem_Bootcamp/python_source/yolo/street_ani.jpeg
+탐지된 객체 수 : 2
+ - 강아지 : box=(116, 14, 254, 146) confidence=0.90
+ - 고양이 : box=(54, 69, 123, 146) confidence=0.60
+----------------------------------------

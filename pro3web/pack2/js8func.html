@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- JAVA SCRIPT 내장함수 -->
+    <h2>java script의 대화상자 관련 함수</h2>
+    <script>
+        let irum = "홍길동";
+        let tel = "111-1111";
+        alert("이름은 " + irum + "\n전화는 " + tel);       // 메세지창 출력
+        console.log("이름은 " + irum + "\n전화는 " + tel);
+        document.write("<br>alert 함수 수행 후 계속");
+
+        let result = confirm("계속 할까요?");       // confirnm() : 선택창  -> true / false
+        document.write("<br> 선택한 값은 " + result);
+        
+        let juso = prompt("사는 곳을 입력", "테헤란로");    // prompt("메세지", "기본값")
+        document.write("<br>사는 곳 : ", juso)
+    </script>
+</body>
+</html>

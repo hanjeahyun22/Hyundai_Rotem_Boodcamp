@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = () => {
+            // 클릭하면 실행(실행결과X) 되어야 하므로, 함수 뒤에 () 괄호 X
+            document.querySelector("#btnGet").onclick = getFunc;
+            document.querySelector("#btnPost").onclick = postFunc;
+        }
+
+        let xhr;
+
+        function getFunc(){
+            // ===============================
+            // 1. 클라이언트에서 보낼 데이터 준비
+            // ===============================
+            let irum = frm.name.value;
+            let age = frm.age.value;
+            // alert(irum + " " + age);
+
+            // ===============================
+            // 2. XMLHttpRequest 객체 생성
+            // XMLHTTP 오브젝트 : 페이지를 새로고침하지 않고 서버와 데이터를 주고받게 해주는 도구
+            // (2번 항목: XMLHttpRequest 생성자)
+            // ===============================
+            xhr = new XMLHttpRequest();             // 서버와 Ajax 통신용 클래스
+            
+            // ===============================
+            // 3. Query String 작성 (GET 방식 데이터 전달)
+            // ===============================
+            // 임시방편용 js16.py 작성 (이 임시 파일은 처리 후, json을 반환한다고 가정.)
+            let fname = "js16.py?irum=" + irum + "&age=" + age;           // js16.py : 요청명
+
+             // ===============================
+            // 4. open() 호출
+            // (10번 항목: 요청 초기화)
+            // readyState = 1 상태
+            // ===============================
+            xhr.open("GET", fname, true);
+
+            // ===============================
+            // 5. onreadystatechange 이벤트 등록
+            // (14번 항목)
+            // readyState 값이 바뀔 때마다 실행
+            // ===============================
+            xhr.onreadystatechange = function(){
+                // readyState 4 = COMPLETED (13번 항목)
+                // status 200 = OK (5번 항목)
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    // ===============================
+                    // 6. 응답 처리
+                    // responseText 사용 (4번 항목)
+                    // ===============================
+                    process1();
+                }
+            }
+
+            // ===============================
+            // 7. send() 호출
+            // (11번 항목)
+            // 실제 서버로 요청 전송
+            // readyState = 2 → 3 → 4 로 진행
+            // ===============================
+            xhr.send();
+        }
+
+        function postFunc(){
+            let irum = frm.name.value;
+            let age = frm.age.value;
+
+            xhr = new XMLHttpRequest();
+            let fname = "js16.py";
+            xhr.open("POST", fname, true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    process1();
+                }
+            }
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("irum=" + irum + "&age=" + age); // body 영역에 포함되어 전송(대용량)
+            
+        }
+
+        // ===============================
+        // 8. 서버 응답 처리 함수
+        // ===============================
+        function process1(){
+            // responseText : 서버 응답을 Text 형태로 받음 (4번 항목)
+            alert(xhr.responseText);
+        }
+
+    </script>
+</head>
+<body>
+    <h2>Ajax 이해 : get, post</h2>
+    <form name="frm">
+        이름 : <input type="text" name="name" value="tom"><br>
+        나이 : <input type="text" name="age" value="33"><br>
+        <input type="button" value="get 방식" id="btnGet">
+        <input type="button" value="post 방식" id="btnPost">
+    </form>
+</body>
+</html>

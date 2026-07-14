@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>* 상품 정보 *</h2>
+    {% if messages %}
+        <ul>
+            {% for m in messages %}
+                <li>{{m}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p><a href="{{url_for('add_form')}}">[추가]</a></p>
+    <!-- <p><a href="/add/">[추가]</a></p> -->
+
+    <table border="1">
+        <tr>
+            <th>코드</th><th>상품명</th><th>수량</th><th>단가</th><th>관리</th>
+        </tr>
+        {% for r in rows %}
+        <tr>
+            <td>{{r.code}}</td>
+            <td>{{r.sang}}</td>
+            <td>{{r.su}}</td>
+            <td>{{r.dan}}</td>
+            <td>
+                <a href="{{url_for('edit_form', code=r.code)}}">수정</a> /
+                
+                <form action="{{url_for('delete_row', code=r.code)}}", code="r.code" method="post"
+                style="display: inline;" onsubmit="return confirm('정말 삭제할까요')">
+                    <button type="submit">삭제</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

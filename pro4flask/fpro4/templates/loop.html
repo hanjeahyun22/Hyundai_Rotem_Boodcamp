@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+<title>{% block title %}반복문(loop.html){% endblock %}</title>
+
+{% block content %}
+    <h3>반복 연습</h3>
+    <ul>
+        {% for user in users %}
+        <li>{{loop.index}}번째 사람 : {{user}}</li>
+        {% endfor %}
+    </ul>
+
+    <p>총 인원 : {{users | length}}</p>             <!-- | : Jinja에서 filter를 줄 때 사용 -->
+{% endblock %}

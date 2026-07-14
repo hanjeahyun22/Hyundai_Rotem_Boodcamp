@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>근무년수 회귀분석</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</head>
+<body>
+
+    <h2>근무년수 → 예상 연봉(LinearRegression)</h2>
+
+    <label for="years">근무년수 : </label>
+    <input type="number" id="years" min="0">
+    <button type="button" id="btnPredict">확인</button>
+
+    <div id="result">
+        <div>
+            예상연봉액 : <b><span id="pay">0</span></b>
+        </div>
+        <br>
+        <div>설명력(R²) : {{ r2 }}%</div>
+        <div>회귀식 : pay = {{ coef }} * years + {{ intercept }}</div>
+    </div>
+
+    <h3>직급별 연봉평균</h3>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>직급</th>
+                <th>평균 연봉</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in jik_avg %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ '{:,}'.format(row[1]) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $('#btnPredict').click(function () {
+            let years = $('#years').val();
+
+            $.ajax({
+                url: '/predict',
+                type: 'POST',
+                data: { years: years },
+                success: function (res) {
+                    $('#pay').text(res.pay);
+                },
+                error: function () {
+                    alert('예측 실패');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

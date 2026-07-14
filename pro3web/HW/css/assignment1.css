@@ -1,0 +1,39 @@
+*{ box-sizing: border-box; }
+body{ margin: 0; }
+
+#page{
+  overflow: auto;   /* float clearfix */
+  width: 90%;    /* 원하면 제거 가능 */
+  margin: 30px auto;   /* 가운데 정렬 */
+}
+
+#menu{
+  float: left;
+  width: 25%;
+  font-size: 20px;
+}
+
+#menu h2{ margin: 0; }
+
+#content{
+  float: right;
+  width: 75%;
+}
+
+#content img{
+  width: 98%;
+  height: 200px;
+  display: block;
+}
+
+#content iframe{
+  width: 98%;
+  height: 300px;
+  border: 0;
+  display: block;
+}
+
+#content b{
+  font-size: 30px;
+  margin-top: 8px;
+}
